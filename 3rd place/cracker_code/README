@@ -1,0 +1,27 @@
+1. the team name: 
+    Cracker
+
+2. for each team member: full name, e-mail, institution, department, and degree program
+    Lin Ma, malin1993ml@gmail.com, School of EECS, Peking University, Bachelor program
+    Yuwang Chen, serenaChan12@gmail.com, Peking University, School of Mathmatics, Yuanpei College, Peking University, Bachelor program
+    Shian Chen, clann24@gmail.com, School of EECS, Peking University, Bachelor program
+    Yingxia Shao, simon0227@gmail.com, School of EECS, Peking University, PhD program
+
+3. advisor/supervisor name (if any)
+    Bin Cui, bin.cui@pku.edu.cn, Professor
+
+4. a brief description of techniques used for executing queries
+Query1: 
+    Aggregate comments between persons first, then compute the shortest path beween a pair by bidirectional BFS. In order to efficiently aggregate the comments, we ordered the person by ID, so do their neighbors. Thus, using binary search, it is fast to retrieve an edge.
+
+Query2: 
+    First, order the query by the birthday, and then incrementally update a component-maintained data structure for fast computing the weight of a tag. The component-maintained data structure is an union-find-set.
+
+Query3: 
+    Enumerate each person and his/her neighbors with in h-hop. In order to fast compute the weight of each pair, we ordered each person's intrest tags, and then the weight can be calculated in linear time.
+
+Query4: 
+    The basic idea is choosing a set of vertices in heuristic with high propablity belonging to top-k, and then compute the exact closeness of the selected vertices. The exacat closeness computation approach is delta-pfs, which is published in paper "Efficient Top-k Closeness Centrality Search, ICDE 2014". After the exact calculation, we update the top-k answer set and see wheter it is changed. If so, we consider the answer set as unstable and do the select-test-update again.
+
+5. all the third party code used
+    sparsehash, https://code.google.com/p/sparsehash/

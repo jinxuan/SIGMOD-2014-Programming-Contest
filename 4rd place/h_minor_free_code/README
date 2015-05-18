@@ -1,0 +1,58 @@
+(1) Team Name:
+H-minor-free
+
+
+(2) Members
+ - Takanori Hayashi, thayashi@is.s.u-tokyo.ac.jp, Bachelor's student (A)
+ - Shuichi Hirahara, hirahara@is.s.u-tokyo.ac.jp, Bachelor's student (A)
+ - Takuto Ikuta, tikuta@is.s.u-tokyo.ac.jp, Bachelor's student (A)
+ - Yuki Kawata, kawatea@lager.is.s.u-tokyo.ac.jp, Master's student (B)
+ - Naoto Ohsaka, ohsaka@is.s.u-tokyo.ac.jp, Master's student (B)
+ - Yosuke Yano, yyano@is.s.u-tokyo.ac.jp, Master's student (B)
+ - Keigo Oka, ogiekako@is.s.u-tokyo.ac.jp, Master's student (B)
+ - Ryosuke Okuta, ryousuke_okuta@shino.ecei.tohoku.ac.jp, Master's student (C)
+ - Takuya Akiba, t.akiba@is.s.u-tokyo.ac.jp, Ph.D. student (B)
+ - Yoichi Iwata, y.iwata@is.s.u-tokyo.ac.jp, Ph.D. student (B)
+
+Affiliations:
+ A --- Dept. of Information Science, School of Science, the University of Tokyo
+ B --- Dept. of Computer Science, Graduate School of Information Science and Technology, the University of Tokyo
+ C --- Dept. of Information and Intelligent Systems, Graduate School of Information Sciences, Tohoku University
+
+
+(3) Supervisor Name:
+N/A
+
+
+(4) Summary of Techniques
+
+ - Query Type 1: We just conduct a bi-directional BFS for each query.
+
+ - Query Type 2: We first read all the queries and process them
+   offline. We answer queries in the ascending order of their time. We
+   start with empty graphs, where each graph represents a subgraph
+   induced by each tag. Then, we add edges from older to newer. During
+   this process, if there are queries that correspond to the current
+   snapshot, we compute the answers for them. We manage connected
+   components using disjoint-set data structures.
+
+ - Query Type 3: We first prepare the list of tags for each person and
+   the inverted list of persons for each tag. For each query, we first
+   enumerate the pairs of persons that share at least one tag by using
+   these lists. Then, in the decreasing order of the number of common
+   tags, we check whether these pairs can be reached by conducting
+   bi-directional BFSs. We terminate this process when we have found k
+   reachable pairs.
+
+ - Query Type 4: We conduct BFSs from all the vertices in the induced
+   subgraph. We prune these BFSs by using upperbounds and current top-k
+   solutions. We compute upperbounds by using the scores from already
+   visited vertices, distance to the current visiting vertex, the number
+   of vertices in the queue, and the total number of neighbors around the
+   vertices in the queue. As there is correlation between centrality and
+   degree, in order to obtain good solutions earlier, we conduct BFSs
+   from vertices in the decreasing order of their degree.
+
+
+(5) Third Party Code:
+N/A
